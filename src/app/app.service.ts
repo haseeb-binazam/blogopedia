@@ -1,3 +1,4 @@
+
 export const credentials = {
     "admin": {
       "id": 10,
@@ -11,5 +12,5 @@ export const credentials = {
       "userType": "blogger",
       "email": "user@blogger.com"
     }
-  }
+}
   

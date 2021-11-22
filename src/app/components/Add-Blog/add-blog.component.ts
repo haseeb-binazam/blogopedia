@@ -62,7 +62,7 @@ export class AddBlog implements OnInit {
                 dt
             );
 
-            console.log(this.blogService.getLength());
+            // console.log(this.blogService.getLength());
 
             this.router.navigate(['../'], {relativeTo: this.route});
         }

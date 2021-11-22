@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 export interface blog {
@@ -12,20 +13,27 @@ export interface blog {
 @Injectable()
 export class BlogService {
     private blogs!: blog[];
-    constructor() {
-        //getting data from api and assigning to local property of class'blogs';
+    errorMessage: any;
 
-        fetch('https://my-json-server.typicode.com/haseeb-binazam/blogs/posts')
-        .then(response => response.json())
-        .then(json => {
-            // console.log(json);
-            this.blogs = json;
-            console.log(this.blogs);
-        })
-    };
-
+    constructor(
+        private http: HttpClient
+    ) {};
 
     getBlogs(): blog[] {
+
+        this.http.get<blog[]>('https://my-json-server.typicode.com/haseeb-binazam/blogs/posts')
+        .subscribe({
+            next: (data) => {
+                this.blogs = data;
+                console.log(this.blogs);
+            },
+
+            error: error => {
+                this.errorMessage = error.message;
+                console.error('There was an error!', this.errorMessage);
+            }
+        });
+        console.log(this.blogs);    
         return this.blogs;
     };
 
@@ -59,23 +67,27 @@ export class BlogService {
         );
 
         //posting new entry to api
-        
-        fetch('https://my-json-server.typicode.com/haseeb-binazam/blogs/posts', {
-        method: 'POST',
-        body: JSON.stringify({
+        const body = {
             id: id,
             name: title,
             writtenBy: author,
             writtenDate: date,
             description: desc,
             content: content,
-        }),
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        },
-        })
-        .then((response) => response.json())
-        .then((json) => console.log(json));
+        }
+
+        this.http.post<any>('https://my-json-server.typicode.com/haseeb-binazam/blogs/posts', body) 
+            .subscribe({
+                next: data => {
+                    console.log(`data added with id : ${data.id}`);
+                },
+
+                error: error => {
+                    this.errorMessage = error.message;
+                    console.error('There was an error!', this.errorMessage);
+                }
+            })
+        
     };    
 
     updateBlog(
@@ -98,20 +110,26 @@ export class BlogService {
 
         //posting updated entry to api
 
-        fetch('https://jsonplaceholder.typicode.com/posts/1', {
-            method: 'PUT',
-            body: JSON.stringify({
-                id: id,
-                name: title,
-                writtenDate: date,
-                description: desc,
-                content: content,
-            }),
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8',
-            },
-        })
-        .then((response) => response.json())
-        .then((json) => console.log(json));
+        const body = {
+            id: id,
+            name: title,
+            writtenDate: date,
+            description: desc,
+            content: content,
+        }
+
+
+        this.http.put<any>(`https://my-json-server.typicode.com/haseeb-binazam/blogs/posts/${id}`, body) 
+            .subscribe({
+                next: data => {
+                    console.log(`data updated with id : ${data.id}`);
+                },
+
+                error: error => {
+                    this.errorMessage = error.message;
+                    console.error('There was an error!', this.errorMessage);
+                }
+            })
+        
     };
 };

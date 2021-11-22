@@ -14,7 +14,7 @@ import { HeaderComponent } from './components/Header/header.component';
 import { LoginComponent } from './components/login-component/login.component';
 import { NewComponent } from './components/NewComponent/new.component';
 import { DropdownDirective } from './directives/dropdown.directive';
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +30,8 @@ import { DropdownDirective } from './directives/dropdown.directive';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [BlogService, DatePipe],
   bootstrap: [AppComponent]
