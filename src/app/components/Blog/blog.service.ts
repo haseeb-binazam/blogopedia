@@ -11,32 +11,19 @@ export interface blog {
 
 @Injectable()
 export class BlogService {
-    private blogs: blog[] = [
-        {
-            id: 1,
-            name: 'My First blog',
-            writtenBy: 'haseeb',
-            writtenDate: '2021/2/12',
-            description: 'a blog about blog',
-            content: 'Lorem ipsum dolor Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur necessitatibus voluptatum enim sint error tenetur. Sit, eaque. Enim corrupti vero magni non necessitatibus odit voluptas voluptates consectetur voluptate illo, obcaecati inventore magnam rerum nostrum explicabo optio. Non numquam, unde animi nulla nemo saepe! Accusantium magnam vitae, saepe minima necessitatibus nostrum nam nesciunt reiciendis eos harum rerum repellendus deserunt a ducimus eligendi. Consectetur suscipit optio modi veniam, quibusdam quod a corrupti in nesciunt esse consequuntur ullam culpa, nulla praesentium reiciendis nostrum impedit fugiat? Obcaecati at odio animi quas commodi reprehenderit, nisi atque quis quod laborum? Dicta quam nostrum modi voluptates error!Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur necessitatibus voluptatum enim sint error tenetur. Sit, eaque. Enim corrupti vero magni non necessitatibus odit voluptas voluptates consectetur voluptate illo, obcaecati inventore magnam rerum nostrum explicabo optio. Non numquam, unde animi nulla nemo saepe! Accusantium magnam vitae, saepe minima necessitatibus nostrum nam nesciunt reiciendis eos harum rerum repellendus deserunt a ducimus eligendi. Consectetur suscipit optio modi veniam, quibusdam quod a corrupti in nesciunt esse consequuntur ullam culpa, nulla praesentium reiciendis nostrum impedit fugiat? Obcaecati at odio animi quas commodi reprehenderit, nisi atque quis quod laborum? Dicta quam nostrum modi voluptates error! sit amet consectetur, adipisicing elit. Amet quia recusandae, officiis earum ab minus eum fugit suscipit ea atque.',
-        },
-        {
-            id: 2,
-            name: 'my second blog',
-            writtenBy: 'ahsan',
-            writtenDate: '2021/2/13',
-            description: 'a blog about dont know anything',
-            content: 'Lorem ipsum dolor sitLorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur necessitatibus voluptatum enim sint error tenetur. Sit, eaque. Enim corrupti vero magni non necessitatibus odit voluptas voluptates consectetur voluptate illo, obcaecati inventore magnam rerum nostrum explicabo optio. Non numquam, unde animi nulla nemo saepe! Accusantium magnam vitae, saepe minima necessitatibus nostrum nam nesciunt reiciendis eos harum rerum repellendus deserunt a ducimus eligendi. Consectetur suscipit optio modi veniam, quibusdam quod a corrupti in nesciunt esse consequuntur ullam culpa, nulla praesentium reiciendis nostrum impedit fugiat? Obcaecati at odio animi quas commodi reprehenderit, nisi atque quis quod laborum? Dicta quam nostrum modi voluptates error! amet consectetur, adipisicing elit. Amet quia recusandae, officiis earum ab minus eum fugit suscipit ea atque.',
-        },
-        {
-            id: 3,
-            name: 'my third blog',
-            writtenBy: 'hanif',
-            writtenDate: '2021/2/11',
-            description: 'a blog about assigment',
-            content: 'Lorem ipsum dolor Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur necessitatibus voluptatum enim sint error tenetur. Sit, eaque. Enim corrupti vero magni non necessitatibus odit voluptas voluptates consectetur voluptate illo, obcaecati inventore magnam rerum nostrum explicabo optio. Non numquam, unde animi nulla nemo saepe! Accusantium magnam vitae, saepe minima necessitatibus nostrum nam nesciunt reiciendis eos harum rerum repellendus deserunt a ducimus eligendi. Consectetur suscipit optio modi veniam, quibusdam quod a corrupti in nesciunt esse consequuntur ullam culpa, nulla praesentium reiciendis nostrum impedit fugiat? Obcaecati at odio animi quas commodi reprehenderit, nisi atque quis quod laborum? Dicta quam nostrum modi voluptates error!sit amet Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur necessitatibus voluptatum enim sint error tenetur. Sit, eaque. Enim corrupti vero magni non necessitatibus odit voluptas voluptates consectetur voluptate illo, obcaecati inventore magnam rerum nostrum explicabo optio. Non numquam, unde animi nulla nemo saepe! Accusantium magnam vitae, saepe minima necessitatibus nostrum nam nesciunt reiciendis eos harum rerum repellendus deserunt a ducimus eligendi. Consectetur suscipit optio modi veniam, quibusdam quod a corrupti in nesciunt esse consequuntur ullam culpa, nulla praesentium reiciendis nostrum impedit fugiat? Obcaecati at odio animi quas commodi reprehenderit, nisi atque quis quod laborum? Dicta Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur necessitatibus voluptatum enim sint error tenetur. Sit, eaque. Enim corrupti vero magni non necessitatibus odit voluptas voluptates consectetur voluptate illo, obcaecati inventore magnam rerum nostrum explicabo optio. Non numquam, unde animi nulla nemo saepe! Accusantium magnam vitae, saepe minima necessitatibus nostrum nam nesciunt reiciendis eos harum rerum repellendus deserunt a ducimus eligendi. Consectetur suscipit optio modi veniam, quibusdam quod a corrupti in nesciunt esse consequuntur ullam culpa, nulla praesentium reiciendis nostrum impedit fugiat? Obcaecati at odio animi quas commodi reprehenderit, nisi atque quis quod laborum? Dicta quam nostrum modi voluptates error!quam nostrum modi voluptates error!consectetur, adipisicing elit. Amet quia recusandae, officiis earum ab minus eum fugit suscipit ea atque.',
-        },
-    ];
+    private blogs!: blog[];
+    constructor() {
+        //getting data from api and assigning to local property of class'blogs';
+
+        fetch('https://my-json-server.typicode.com/haseeb-binazam/blogs/posts')
+        .then(response => response.json())
+        .then(json => {
+            // console.log(json);
+            this.blogs = json;
+            console.log(this.blogs);
+        })
+    };
+
 
     getBlogs(): blog[] {
         return this.blogs;
@@ -59,6 +46,7 @@ export class BlogService {
         content: string,
         date: string | null
     ) {
+        //pushing new entry to local array
         this.blogs.push(
             {
                 id: id,
@@ -68,7 +56,26 @@ export class BlogService {
                 description: desc,
                 content: content,
             }
-        )
+        );
+
+        //posting new entry to api
+        
+        fetch('https://my-json-server.typicode.com/haseeb-binazam/blogs/posts', {
+        method: 'POST',
+        body: JSON.stringify({
+            id: id,
+            name: title,
+            writtenBy: author,
+            writtenDate: date,
+            description: desc,
+            content: content,
+        }),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+        })
+        .then((response) => response.json())
+        .then((json) => console.log(json));
     };    
 
     updateBlog(
@@ -78,6 +85,8 @@ export class BlogService {
         content: string,
         date: string | null
     ) {
+        //pushing updated entry to local array
+        // console.log(id);
         this.blogs[id-1].name = title;
         this.blogs[id-1].description = desc;
         this.blogs[id-1].content = content;
@@ -86,5 +95,23 @@ export class BlogService {
         // console.log(desc);
         // console.log(content);
         // console.log(date);
+
+        //posting updated entry to api
+
+        fetch('https://jsonplaceholder.typicode.com/posts/1', {
+            method: 'PUT',
+            body: JSON.stringify({
+                id: id,
+                name: title,
+                writtenDate: date,
+                description: desc,
+                content: content,
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+        .then((response) => response.json())
+        .then((json) => console.log(json));
     };
 };
