@@ -9,14 +9,31 @@ import { NewComponent } from './components/NewComponent/new.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/bloglist', pathMatch: 'full' },
-  { path: 'bloglist', component: BlogList },
+
+  { path: 'bloglist', component: BlogList, 
+    children: [
+      { path: 'admin', 
+        children: [
+          { path: ':id', component: BlogDetail },
+        ]
+      },
+
+      { path: 'blogger', 
+        children: [
+          { path: ':id', component: BlogDetail },
+        ]
+      },
+  ] },
+
   { path: 'editblog', component: AddBlog  },
+
   { path: 'blogdetail', component: NewComponent,
     children: [
       { path: ':id', component: BlogDetail },
       { path: ':id/edit', component: EditBlog }
     ]
   },
+
   { path: 'login', component: LoginComponent }
 ];
 

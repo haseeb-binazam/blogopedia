@@ -31,6 +31,10 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand heading-link" [routerLink]='"/"'>Blogopedia</a>
   
-  <button type="button" class="btn btn-light ml-auto">Admin</button>
-  <button type="button" class="btn btn-light">Blogger</button>
+  <button type="button" class="btn btn-light ml-auto"
+    [routerLink]="['/login'] " 
+  >Admin</button>
+  <button type="button" class="btn btn-light"
+    routerLink='/login'  
+  >Blogger</button>
 </nav>
