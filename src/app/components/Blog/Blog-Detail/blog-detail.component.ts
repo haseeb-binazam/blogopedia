@@ -26,6 +26,8 @@ export class BlogDetail implements OnInit {
                 // console.log(this.blogDetail);
             }
         );
+
+        
     };
 
     onEdit() {

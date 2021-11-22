@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { blog, BlogService } from '../blog.service';
 
 @Component({
@@ -14,12 +14,21 @@ export class BlogList implements OnInit {
 
     constructor(
         private blogService: BlogService,
-        private router: Router
+        private router: Router,
+        private route: ActivatedRoute
     ) { };
 
     ngOnInit() { 
         this.blogs = this.blogService.getBlogs();
         // console.log(this.blogs);
+
+        this.route.paramMap.subscribe(
+            (val: ParamMap) => {
+                let name = val.get('name');
+                console.log(name);
+                
+            }
+        );
     };
 
     onReadmore(id: number) {

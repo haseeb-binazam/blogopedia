@@ -14,13 +14,13 @@ const routes: Routes = [
     children: [
       { path: 'admin', 
         children: [
-          { path: ':id', component: BlogDetail },
+          { path: ':name', component: BlogList },
         ]
       },
 
       { path: 'blogger', 
         children: [
-          { path: ':id', component: BlogDetail },
+          { path: ':name', component: BlogList },
         ]
       },
   ] },

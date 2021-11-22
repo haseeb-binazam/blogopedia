@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, ParamMap, Params } from "@angular/router";
 
 @Component({
     selector: 'header-component',
@@ -6,6 +7,16 @@ import { Component } from "@angular/core";
     styleUrls: ['./header.component.css']
 })
 
-export class HeaderComponent  {
-    
+export class HeaderComponent implements OnInit  {
+    constructor(
+        private route: ActivatedRoute
+    ) { };
+
+    ngOnInit() {
+        // this.route.paramMap.subscribe(
+        //     (params: ParamMap) => {
+        //         console.log(params.get('name'));
+        //     }
+        // )
+    };
 }
