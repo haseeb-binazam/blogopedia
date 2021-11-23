@@ -19,7 +19,7 @@ export class BlogList implements OnInit {
     ) { };
 
     ngOnInit() { 
-        this.blogService.getBlogs()
+        this.blogService.GetBlogs()
             .subscribe(
                 (data: blog[]) => {
                     // console.log(data);  

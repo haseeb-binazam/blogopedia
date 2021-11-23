@@ -38,7 +38,7 @@ export class AddBlog implements OnInit {
         // console.log('content:' + c);
         // console.log('date:' + dt);
 
-        let id: number = this.blogService.getBlogs().length;
+        let id: number = this.blogService.GetBlogs().length;
         id = id + 1;
         // console.log(id);
 

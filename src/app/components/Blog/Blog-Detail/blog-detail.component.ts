@@ -24,7 +24,7 @@ export class BlogDetail implements OnInit {
                 let id = parseInt(val.get('id') || '');
                 // console.log(id);
                 // console.log(this.id);
-                this.blogService.getBlogs().subscribe(
+                this.blogService.GetBlogs().subscribe(
                     (data: any) => {
                         for(let i of data) {
                             // console.log(i);

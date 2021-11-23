@@ -21,7 +21,7 @@ export class BlogService {
         private http: HttpClient
     ) {};
 
-    getBlogs(): any {
+    GetBlogs(): any {
         return this.http.get<blog[]>('https://my-json-server.typicode.com/haseeb-binazam/blogs/posts');
     };
 
