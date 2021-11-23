@@ -16,6 +16,8 @@ import { NewComponent } from './components/NewComponent/new.component';
 import { DropdownDirective } from './directives/dropdown.directive';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { AuthService } from './auth.service';
+import { AuthGuard } from './auth-guard.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +38,7 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [BlogService, DatePipe],
+  providers: [BlogService, DatePipe, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -25,7 +25,7 @@ export class BlogService {
         .subscribe({
             next: (data) => {
                 this.blogs = data;
-                console.log(this.blogs);
+                // console.log(this.blogs);
             },
 
             error: error => {
@@ -33,7 +33,7 @@ export class BlogService {
                 console.error('There was an error!', this.errorMessage);
             }
         });
-        console.log(this.blogs);    
+        // console.log(this.blogs);    
         return this.blogs;
     };
 

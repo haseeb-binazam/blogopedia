@@ -29,6 +29,13 @@ export class BlogList implements OnInit {
                 
             }
         );
+        this.route.paramMap.subscribe(
+            (val: ParamMap) => {
+                let name = val.get('userType');
+                console.log(name);
+                
+            }
+        );
     };
 
     onReadmore(id: number) {

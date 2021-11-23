@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { credentials } from '../../app.service';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
     selector: 'app-login-component',
@@ -12,7 +13,8 @@ import { FormGroup, FormControl, Validators} from '@angular/forms';
 export class LoginComponent implements OnInit {
     constructor(
         private router: Router,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private authService: AuthService
     ) { };
 
     ngOnInit() { };
@@ -32,7 +34,9 @@ export class LoginComponent implements OnInit {
         console.log(credentials.admin.email);
         if(this.form.value.email == credentials.admin.email) {
             if(this.form.value.password == credentials.admin.password){
-                this.router.navigate(['/bloglist/admin', this.form.value.uname]);
+                // console.log(this.authService.login());
+                this.authService.login()
+                this.router.navigate(['/bloglist', credentials.admin.userType, this.form.value.uname]);
             }
             else {
                 alert('enter valid password');
