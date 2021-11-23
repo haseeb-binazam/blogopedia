@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { blog, BlogService } from '../blog.service';
 
@@ -19,21 +19,29 @@ export class BlogList implements OnInit {
     ) { };
 
     ngOnInit() { 
-        this.blogs = this.blogService.getBlogs();
+        this.blogService.getBlogs()
+            .subscribe(
+                (data: blog[]) => {
+                    // console.log(data);  
+                    this.blogs = data;
+                },
+
+                (err: any) => {console.log(err);}
+            )
         // console.log(this.blogs);
 
         this.route.paramMap.subscribe(
             (val: ParamMap) => {
                 let name = val.get('name');
-                console.log(name);
-                
+                // console.log(name);
+                this.blogService.setName(name);
             }
         );
         this.route.paramMap.subscribe(
             (val: ParamMap) => {
-                let name = val.get('userType');
-                console.log(name);
-                
+                let type = val.get('userType');
+                // console.log(type);
+                this.blogService.setType(type);
             }
         );
     };

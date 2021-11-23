@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
                     if(authenticated) {
                         return true;
                     } else {
-                        alert('you are not logged in as a admin, only admins are allowd to edit the post')
+                        alert('you need to login first')
                         this.router.navigate(['/login']);
                     }
                 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, ParamMap, Params } from "@angular/router";
+import { BlogService } from "../Blog/blog.service";
 
 @Component({
     selector: 'header-component',
@@ -9,14 +10,13 @@ import { ActivatedRoute, ParamMap, Params } from "@angular/router";
 
 export class HeaderComponent implements OnInit  {
     constructor(
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private blogService: BlogService
     ) { };
 
+    subscription: any;
+
     ngOnInit() {
-        // this.route.paramMap.subscribe(
-        //     (params: ParamMap) => {
-        //         console.log(params.get('name'));
-        //     }
-        // )
+        
     };
 }

@@ -11,6 +11,7 @@ import { blog, BlogService } from '../blog.service';
 export class BlogDetail implements OnInit {
 
     blogDetail!: blog;
+
     constructor(
         private route: ActivatedRoute,
         private router: Router,
@@ -22,10 +23,23 @@ export class BlogDetail implements OnInit {
             (val: ParamMap) => {
                 let id = parseInt(val.get('id') || '');
                 // console.log(id);
-                this.blogDetail = this.blogService.getBlogOnID(id)
-                // console.log(this.blogDetail);
+                // console.log(this.id);
+                this.blogService.getBlogs().subscribe(
+                    (data: any) => {
+                        for(let i of data) {
+                            // console.log(i);
+                            if( i.id === id ) {
+                                // console.log(i);
+                                this.blogDetail = i;
+                                // console.log(this.blogDetail);
+                            }
+                        }
+                    },
+                    (err: any) => {console.log(err);}
+                )
             }
         );
+
 
         
     };

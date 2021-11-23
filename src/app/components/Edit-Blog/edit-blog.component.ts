@@ -26,8 +26,8 @@ export class EditBlog implements OnInit {
             (param: Params) => {
                 // console.log(param['id']);
                 this.id = +param['id']; //+ will convert string to number
-                this.blogDetail = this.blogService.getBlogOnID(this.id);
-                // console.log(this.blogDetail);
+                this.blogDetail = this.blogService.getBlogs();
+                console.log(this.blogDetail);
             }
         )
     };

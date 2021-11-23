@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter, Output } from '@angular/core';
 
 export interface blog {
     id: number,
@@ -12,39 +12,30 @@ export interface blog {
 
 @Injectable()
 export class BlogService {
-    private blogs!: blog[];
     errorMessage: any;
+    id: any;
+    name: any;
+    type: any;
 
     constructor(
         private http: HttpClient
     ) {};
 
-    getBlogs(): blog[] {
-
-        this.http.get<blog[]>('https://my-json-server.typicode.com/haseeb-binazam/blogs/posts')
-        .subscribe({
-            next: (data) => {
-                this.blogs = data;
-                // console.log(this.blogs);
-            },
-
-            error: error => {
-                this.errorMessage = error.message;
-                console.error('There was an error!', this.errorMessage);
-            }
-        });
-        // console.log(this.blogs);    
-        return this.blogs;
+    getBlogs(): any {
+        return this.http.get<blog[]>('https://my-json-server.typicode.com/haseeb-binazam/blogs/posts');
     };
 
-    getBlogOnID(id: number) {
-        let index = id - 1;
-        return this.blogs[index];
-    };
+    setName(name: any) {
+        console.log(name);
+        this.name = name;
+    }
+    
+    setType(type: any) {
+        console.log(type);
+        this.type = type;
+    }
 
-    getLength(): number {
-        return this.blogs.length;
-    };
+
 
     addBlog(
         id: number,
@@ -54,18 +45,6 @@ export class BlogService {
         content: string,
         date: string | null
     ) {
-        //pushing new entry to local array
-        this.blogs.push(
-            {
-                id: id,
-                name: title,
-                writtenBy: author,
-                writtenDate: date,
-                description: desc,
-                content: content,
-            }
-        );
-
         //posting new entry to api
         const body = {
             id: id,
@@ -97,17 +76,6 @@ export class BlogService {
         content: string,
         date: string | null
     ) {
-        //pushing updated entry to local array
-        // console.log(id);
-        this.blogs[id-1].name = title;
-        this.blogs[id-1].description = desc;
-        this.blogs[id-1].content = content;
-        this.blogs[id-1].writtenDate = date;
-        // console.log(title);
-        // console.log(desc);
-        // console.log(content);
-        // console.log(date);
-
         //posting updated entry to api
 
         const body = {
